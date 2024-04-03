@@ -1,0 +1,90 @@
+Data Deduplikasyonu ve Gereksiz Dosyaları Silip Yer Açma Programı:
+
+Yapılacaklar:
+1)	Çalışma ortamı hazırla
+2)	O çalışma ortamında hangi dosyaların taranıp taranılmayacağıyla ilgili karar ver
+3)	Rakipleri araştır
+4)	Programın özelliklerini belirle
+5)	Tarama için karar ver: Fuzzy(belli miktarda benzerlik oranı) ya da Kesin(%100 benzerlik)
+6)	Hangisi seçilecekse onlarla ilgili eski araştırmalara bak (github vs)
+7)	Bilgisayarda gereksiz data biriken yerleri de belirle
+8)	Python mı php mi kullanıcan karar ver
+9)	Arayüz tasarım yap
+10)	Yazılıma başla
+11)	Raporu yazmaya başla
+Yapılma aşamasında:
+1)	Ara yüz tasarımı
+2)	Rakipleri araştır
+3)	Özellikleri belirle
+4)	Fonksiyonları belirle(Hashing ve ssdeep)
+5)	Kullanacağın dili belirle (Python)
+
+
+
+
+
+
+
+
+
+Rakip araştırması:
+Sonuç: Rakiplerim genel olarak yedekleme, şifreleme ve deduplikasyon üzerine çalışıyor. Ama normal bir zamanda günlük kullanıcıların kullanabileceği seviyenin çok üstünde kalmış durumdalar. O yüzden ben yedek kısmına girmek yerine normal bir kullanıcının diskte yer açma ihtiyacına yönelik bir program yapmak istiyorum.
+Acronis True Image:
+Deduplication: Integrated into the backup process
+Features: Full disk image backup, file backup, active disk cloning, ransomware protection
+Compatibility: Windows, macOS
+Use Case: Ideal for individual users needing comprehensive backup and data protection
+Veeam Backup & Replication:
+Deduplication: Built-in deduplication and compression
+Features: Image-based backup, replication, disaster recovery, secure file copy
+Compatibility: Windows, Linux (for servers and workstations)
+Use Case: Suitable for small to medium-sized businesses looking for robust backup and recovery solutions
+Duplicati:
+Deduplication: Block-level deduplication
+Features: Backup to various storage types (local, cloud, network), encryption, scheduling
+Compatibility: Windows, macOS, Linux
+Use Case: A good option for users looking for a free, open-source backup solution with deduplication
+EaseUS Todo Backup:
+Deduplication: File-level deduplication in backup process
+Features: Disk/partition backup, file backup, system backup, clone function
+Compatibility: Windows
+Use Case: Suitable for home users and small businesses needing easy-to-use backup software
+CloudBerry Backup (now MSP360 Backup):
+Deduplication: Block-level deduplication
+Features: Backup to various cloud storage providers, encryption, compression
+Compatibility: Windows, macOS, Linux
+Use Case: Ideal for users looking to back up data to the cloud with added deduplication and security features
+
+
+Belirlenen Özellikler:
+1)	Kullanıcının verdiği path i tarar
+2)	Duplike dosyaları bulur (Exact için Hashing, Fuzzy için ssdeep)
+3)	Ayrı ayrı ekranlarda kullanıcının duplike dataları seçip işaretleme yapabileceği bir ekran sunar ve seçilen dosyaların en güncel halini tutarak duplike olanları siler
+
+
+
+
+Algoritma ve Fonksiyonlar:
+Exact Bakmak için hızlı ve mantıklı:
+Hashing (MD5, SHA-1, SHA-256): This is a widely used and efficient method for finding duplicate files. It's particularly suitable for large datasets where comparing files byte by byte would be too slow. You can use Python's hashlib module to generate hash values for each file and then compare these hash values to identify duplicates.
+Pros: Fast and efficient for large datasets; easy to implement.
+Cons: Hash collisions are theoretically possible (though very unlikely with SHA-256); doesn't work for finding similar but not identical files.
+
+Filecmp (for smaller datasets or precise comparison): If you need to ensure that files are exactly identical and your dataset is not too large, you can use Python's built-in filecmp module for a byte-by-byte comparison.
+Pros: Guarantees that files are identical; simple to use.
+Cons: Can be slow for large datasets; not suitable for finding similar files.
+Depending on the specifics of your project and the type of data you're working with, you might choose one of these methods or a combination. For example, you could use hashing to quickly find potential duplicates and then use filecmp for a precise comparison if needed.
+
+
+
+
+
+
+
+Benzerlik bakmak için:
+Fuzzy Hashing (ssdeep): Fuzzy hashing algorithms generate hash values that allow for comparison of files with small differences. These hashes can be compared to find files that are similar but not identical. Libraries like ssdeep in Python can be used for this purpose.
+Python example:
+import ssdeep
+hash1 = ssdeep.hash_from_file('file1.txt')
+hash2 = ssdeep.hash_from_file('file2.txt')
+similarity = ssdeep.compare(hash1, hash2)
