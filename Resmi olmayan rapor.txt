@@ -21,12 +21,6 @@ Yapılma aşamasında:
 
 
 
-
-
-
-
-
-
 Rakip araştırması:
 Sonuç: Rakiplerim genel olarak yedekleme, şifreleme ve deduplikasyon üzerine çalışıyor. Ama normal bir zamanda günlük kullanıcıların kullanabileceği seviyenin çok üstünde kalmış durumdalar. O yüzden ben yedek kısmına girmek yerine normal bir kullanıcının diskte yer açma ihtiyacına yönelik bir program yapmak istiyorum.
 Acronis True Image:
@@ -62,8 +56,6 @@ Belirlenen Özellikler:
 3)	Ayrı ayrı ekranlarda kullanıcının duplike dataları seçip işaretleme yapabileceği bir ekran sunar ve seçilen dosyaların en güncel halini tutarak duplike olanları siler
 
 
-
-
 Algoritma ve Fonksiyonlar:
 Exact Bakmak için hızlı ve mantıklı:
 Hashing (MD5, SHA-1, SHA-256): This is a widely used and efficient method for finding duplicate files. It's particularly suitable for large datasets where comparing files byte by byte would be too slow. You can use Python's hashlib module to generate hash values for each file and then compare these hash values to identify duplicates.
@@ -74,11 +66,6 @@ Filecmp (for smaller datasets or precise comparison): If you need to ensure that
 Pros: Guarantees that files are identical; simple to use.
 Cons: Can be slow for large datasets; not suitable for finding similar files.
 Depending on the specifics of your project and the type of data you're working with, you might choose one of these methods or a combination. For example, you could use hashing to quickly find potential duplicates and then use filecmp for a precise comparison if needed.
-
-
-
-
-
 
 
 Benzerlik bakmak için:
