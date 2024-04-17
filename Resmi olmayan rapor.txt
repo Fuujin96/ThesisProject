@@ -75,3 +75,13 @@ import ssdeep
 hash1 = ssdeep.hash_from_file('file1.txt')
 hash2 = ssdeep.hash_from_file('file2.txt')
 similarity = ssdeep.compare(hash1, hash2)
+
+Exact araştırmasında 100 file olan bir klasörde 11 duplike file ayarladım.
+SHA-256 hashlemesinin araştırmalarıma göre hızlı olması gerekirken çok garip bir şekilde filecmp için yazdığım kodun cok daha hızlı olduğu gözlemledim.
+SHA-256 Time taken to compare all files: 17.85 seconds
+filecmp Time taken to compare all files: 0.28 seconds
+
+Bu büyüklükte bir zaman farkının olmasını beklemiyordum.
+
+
+
