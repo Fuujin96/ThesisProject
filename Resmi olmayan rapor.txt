@@ -83,5 +83,10 @@ filecmp Time taken to compare all files: 0.28 seconds
 
 Bu büyüklükte bir zaman farkının olmasını beklemiyordum.
 
+Fuzzy de ssdeep baya eski kaldığı için çalıştırmaya çalışırken çok problem çıkardı o yüzden TLSH (Trend Micro Locality Sensitive Hash) kullanmaya karar verdim.
+Bu fonksiyonda benzerlik oranı 0-100 arasında 0 aynı dosya 100 farklı dosya olarak belirtiliyor.
+ben kendi algoritmamda benzerlik oranını 25 ve altındaysa benzer olarak belirtilmesini istedim.
+Dosyamda 104 adet file var bunların 13 tanesi aynı 4 tanesi de benzer
+TLHS Time taken to compare all files: 61.42 seconds
 
 
